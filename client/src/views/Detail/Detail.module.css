@@ -1,0 +1,25 @@
+.container {
+    background-image: url('https://i.pinimg.com/564x/76/d4/e6/76d4e6d0e84835bb6f34801e3b7d745c.jpg');
+    background-color: aqua;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .image {
+    max-width: 400px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .link {
+    display: block;
+    margin-top: 20px;
+  }
+  

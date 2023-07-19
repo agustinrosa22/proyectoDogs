@@ -1,0 +1,73 @@
+.body{
+    background-image: url("https://img.freepik.com/foto-gratis/fondo-madera-madera-textura-patron-wallpaper-concepto_53876-14103.jpg?w=1380&t=st=1687450163~exp=1687450763~hmac=c5a5b6853e1357806718e5775951e3cd43e9a371047ce67803201a9bd95abf81");
+    background-size:cover;
+    background-repeat: repeat-y;
+   
+  }
+.container {
+  background-color:rgb(250, 250, 189);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    
+  }
+  
+  
+  .filters {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .filter-label {
+    margin-right: 10px;
+  }
+  
+  .filter-select {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .filter-button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-description {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .activePage {
+    color: blue; 
+  }

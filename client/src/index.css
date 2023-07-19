@@ -1,4 +1,8 @@
 body {
+  background-image: url("https://img.freepik.com/foto-gratis/fondo-madera-madera-textura-patron-wallpaper-concepto_53876-14103.jpg?w=1380&t=st=1687450163~exp=1687450763~hmac=c5a5b6853e1357806718e5775951e3cd43e9a371047ce67803201a9bd95abf81");
+    background-size:cover;
+    background-repeat: repeat-y;
+  
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
