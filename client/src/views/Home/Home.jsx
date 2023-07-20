@@ -15,20 +15,21 @@ import {
 } from '../../redux/actions';
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const dogsList = useSelector((state) => state.dogsList);
-  const temperaments = useSelector((state) => state.temperamentOptions);
-  const currentPage = useSelector((state) => state.currentPage);
+  const dispatch = useDispatch();//useDispatch para obtener la función dispatch para enviar acciones al store
+  const dogsList = useSelector((state) => state.dogsList);//useSelector para obtener el estado 'dogsList' desde el store
+  const temperaments = useSelector((state) => state.temperamentOptions);//useSelector para obtener el estado 'temperamentOptions' desde el store
+  const currentPage = useSelector((state) => state.currentPage);//useSelector para obtener el estado 'temperamentOptions' desde el store
   const dogsPerPage = 8;
 
-  const [selectedTemperament, setSelectedTemperament] = useState('');
-  const [selectedOrigin, setSelectedOrigin] = useState('');
+  const [selectedTemperament, setSelectedTemperament] = useState('');//Estado local para almacenar el temperamento seleccionado en el filtro
+  const [selectedOrigin, setSelectedOrigin] = useState('');//Estado local para almacenar el origen seleccionada en el filtro
 
-  useEffect(() => {
+  useEffect(() => {//useEffect para obtener la lista de perros y los temperamentos disponibles cuando el componente se monta
     dispatch(getDogs());
     dispatch(getTemperaments());
   }, [dispatch]);
 
+// Funciones para manejar los filtros y la clasificación de los perros
   const handleSortByNameAsc = () => {
     dispatch(sortDogsByNameAsc());
   };
@@ -64,12 +65,13 @@ const Home = () => {
   };
 
   // Paginado
+  //Se obtienen los perros correspondientes a la página actual para mostrar en el CardsContainer
   const indexOfLastDog = currentPage * dogsPerPage;
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
   const currentDogs = dogsList.slice(indexOfFirstDog, indexOfLastDog);
-  const totalPages = Math.ceil(dogsList.length / dogsPerPage);
+  const totalPages = Math.ceil(dogsList.length / dogsPerPage);//calculo el número total de páginas necesarias para la paginación
 
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = (pageNumber) => {// Función para manejar el cambio de página en la paginación
     dispatch(setCurrentPage(pageNumber));
   };
 

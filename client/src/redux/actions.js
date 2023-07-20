@@ -15,19 +15,20 @@ import {
   FILTER_DOGS_BY_ORIGIN,
 } from './actionsTypes';
 
-export const getDogs = () => {
+export const getDogs = () => {//funcion para obtener la lista de los perros
   return async function (dispatch) {
     try {
       const apiData = await axios.get('http://localhost:3001/dogs');
       const dogs = apiData.data;
-      dispatch({ type: GET_DOGS, payload: dogs });
+      
+      dispatch({ type: GET_DOGS, payload: dogs });//se despacha a la store con el payload que contiene los datos de los perros.
     } catch (error) {
       console.error(error);
     }
   };
 };
 
-export const addDog = (dog) => {
+export const addDog = (dog) => { //funcion que realiza una solicitud POST para agregar un nuevo perro a la base de datos
   return async function (dispatch) {
     try {
       const response = await axios.post('http://localhost:3001/dogs', dog);
@@ -38,7 +39,7 @@ export const addDog = (dog) => {
   };
 };
 
-export const getTemperaments = () => {
+export const getTemperaments = () => { // funcion para obtener la lista de temperamentos de los perros.
   return async function (dispatch) {
     try {
       const response = await axios.get('http://localhost:3001/temperaments');
@@ -54,7 +55,7 @@ export const getTemperaments = () => {
   };
 };
 
-export const searchDogs = (name) => {
+export const searchDogs = (name) => {//función que toma el parámetro name y realiza una solicitud GET para buscar perros que coincidan con el nombre proporcionado.
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`http://localhost:3001/dogs?name=${name}`);
@@ -74,7 +75,7 @@ export const searchDogs = (name) => {
   };
 };
 
-export const setCurrentPage = (pageNumber) => {
+export const setCurrentPage = (pageNumber) => { //funcion que contiene el numero de pagina actual. Actualiza a la pagina actual
   return {
     type: SET_CURRENT_PAGE,
     payload: pageNumber,

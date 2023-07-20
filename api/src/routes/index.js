@@ -10,8 +10,8 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/dogs/', getdogsHandler)
-router.get('/dogs/:id', getDogById);//me lleva a todas las rutas de recipes
+router.get('/dogs/:id', getDogById);
 router.post('/dogs/', postDogsHandler);
-router.get('/temperaments',  Alltemperaments);//me lleva a todas las rutas de diets
+router.get('/temperaments',  Alltemperaments);
 
 module.exports = router;

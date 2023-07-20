@@ -5,10 +5,10 @@ import { addDog, getTemperaments } from '../../redux/actions';
 import styles from './Form.module.css';
 
 const Form = () => {
-  const dispatch = useDispatch();
-  const temperaments = useSelector((state) => state.temperamentOptions);
+  const dispatch = useDispatch(); //useDispatch para obtener la función dispatch para enviar acciones al store
+  const temperaments = useSelector((state) => state.temperamentOptions);//useSelector para obtener el estado 'temperamentOptions' desde el store
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState({//useState para crear el estado 'form' y la función 'setForm' para actualizarlo
     name: '',
     minHeight: '',
     maxHeight: '',
@@ -19,11 +19,11 @@ const Form = () => {
     image: '',
   });
 
-  useEffect(() => {
+  useEffect(() => {//useEffect para obtener los temperamentos disponibles cuando el componente se monta
     dispatch(getTemperaments());
   }, [dispatch]);
 
-  const handleChange = (e) => {
+  const handleChange = (e) => {// Función para manejar el cambio en los campos del formulario
     const { name, value } = e.target;
     if (name === 'name' && value !== '' && !/^[a-zA-Z\s]+$/.test(value)) {
       return; // Si el valor contiene caracteres no válidos y no está vacío, no se actualiza el estado
@@ -31,23 +31,23 @@ const Form = () => {
     if ((name === 'minHeight' || name === 'maxHeight' || name === 'minWeight' || name === 'maxWeight') && value < 0) {
       return; // Si el valor es negativo, no se actualiza el estado
     }
-    setForm({ ...form, [name]: value });
+    setForm({ ...form, [name]: value });// Realiza validaciones y actualiza el estado 'form' con el nuevo valor
   };
 
-  const handleSelectChange = (selectedOptions) => {
-    const selectedTemperaments = selectedOptions.map((option) => option.value);
+  const handleSelectChange = (selectedOptions) => {//Función para manejar el cambio en el componente Select de temperamentos
+    const selectedTemperaments = selectedOptions.map((option) => option.value);//Obtiene los valores seleccionados y actualiza el estado 'form' con los temperamentos seleccionados
     setForm({ ...form, selectedTemperaments });
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e) => {//Función para manejar el cambio en el campo de imagen
     const { value } = e.target;
-    setForm({ ...form, image: value });
+    setForm({ ...form, image: value });//actualiza el estado
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => {//Función para manejar el envío del formulario
     e.preventDefault();
   
-    const newDog = {
+    const newDog = {// // Crea un objeto 'newDog' con los datos ingresados en el formulario
       name: form.name,
       height: {
         min: form.minHeight,
@@ -58,13 +58,13 @@ const Form = () => {
         max: form.maxWeight,
       },
       life_span: form.lifeSpan,
-      temperament: form.selectedTemperaments, // Incluye los temperamentos seleccionados
+      temperament: form.selectedTemperaments, 
       image: form.image,
     };
   
-    dispatch(addDog(newDog));
+    dispatch(addDog(newDog));// // Envía la acción 'addDog' al store para agregar el nuevo perro
   
-    setForm({
+    setForm({//Resetea los campos del formulario
       name: '',
       minHeight: '',
       maxHeight: '',

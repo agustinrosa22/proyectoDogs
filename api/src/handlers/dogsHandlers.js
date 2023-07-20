@@ -16,7 +16,7 @@ const getDogById = async (req, res) => {
 const getdogsHandler = async (req, res) => {
     try {
         const { name } = req.query;
-        const busqueda = name ? await searchDogByName(name) : await getAllDogs();
+        const busqueda = name ? await searchDogByName(name) : await getAllDogs();//si no doy nombres devuelvo todos los dogs
         //console.log(busqueda)
         return res.status(200).json(busqueda)
     } catch (error) {
@@ -43,7 +43,7 @@ const postDogsHandler = async (req, res) => {
       height,
       weight,
       life_span,
-      temperaments: temperament, // Utiliza el campo `temperaments` en plural
+      temperaments: temperament, 
     });
     res.status(200).json(newDog);
   } catch (error) {
