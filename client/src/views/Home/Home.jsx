@@ -78,7 +78,7 @@ const Home = () => {
   return (
     <body className={styles.body}>
       <div className={styles.container}>
-        <h1 className={styles.title}>BIENVENIDOS!!!</h1>
+        <h1 className={styles.title}>ALL OUR DOGS!!!</h1>
         <div className={styles.optionsContainer}>
         <select
             value={selectedTemperament}

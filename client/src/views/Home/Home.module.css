@@ -69,5 +69,7 @@
   }
   
   .activePage {
-    color: blue; 
+    color: rgb(41, 82, 3); 
+    border: solid 1px rgb(41, 82, 3);
   }
+ 

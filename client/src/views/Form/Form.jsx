@@ -5,10 +5,10 @@ import { addDog, getTemperaments } from '../../redux/actions';
 import styles from './Form.module.css';
 
 const Form = () => {
-  const dispatch = useDispatch(); //useDispatch para obtener la función dispatch para enviar acciones al store
-  const temperaments = useSelector((state) => state.temperamentOptions);//useSelector para obtener el estado 'temperamentOptions' desde el store
+  const dispatch = useDispatch();
+  const temperaments = useSelector((state) => state.temperamentOptions);
 
-  const [form, setForm] = useState({//useState para crear el estado 'form' y la función 'setForm' para actualizarlo
+  const [form, setForm] = useState({
     name: '',
     minHeight: '',
     maxHeight: '',
@@ -19,11 +19,12 @@ const Form = () => {
     image: '',
   });
 
-  useEffect(() => {//useEffect para obtener los temperamentos disponibles cuando el componente se monta
+  useEffect(() => {
     dispatch(getTemperaments());
   }, [dispatch]);
 
-  const handleChange = (e) => {// Función para manejar el cambio en los campos del formulario
+  const handleChange = (e) => {
+    e.preventDefault()
     const { name, value } = e.target;
     if (name === 'name' && value !== '' && !/^[a-zA-Z\s]+$/.test(value)) {
       return; // Si el valor contiene caracteres no válidos y no está vacío, no se actualiza el estado
@@ -31,23 +32,23 @@ const Form = () => {
     if ((name === 'minHeight' || name === 'maxHeight' || name === 'minWeight' || name === 'maxWeight') && value < 0) {
       return; // Si el valor es negativo, no se actualiza el estado
     }
-    setForm({ ...form, [name]: value });// Realiza validaciones y actualiza el estado 'form' con el nuevo valor
+    setForm({ ...form, [name]: value });
   };
 
-  const handleSelectChange = (selectedOptions) => {//Función para manejar el cambio en el componente Select de temperamentos
-    const selectedTemperaments = selectedOptions.map((option) => option.value);//Obtiene los valores seleccionados y actualiza el estado 'form' con los temperamentos seleccionados
+  const handleSelectChange = (selectedOptions) => {
+    const selectedTemperaments = selectedOptions.map((option) => option.value);
     setForm({ ...form, selectedTemperaments });
   };
 
-  const handleImageChange = (e) => {//Función para manejar el cambio en el campo de imagen
+  const handleImageChange = (e) => {
     const { value } = e.target;
-    setForm({ ...form, image: value });//actualiza el estado
+    setForm({ ...form, image: value });
   };
 
-  const handleSubmit = (e) => {//Función para manejar el envío del formulario
+  const handleSubmit = (e) => {
     e.preventDefault();
   
-    const newDog = {// // Crea un objeto 'newDog' con los datos ingresados en el formulario
+    const newDog = {
       name: form.name,
       height: {
         min: form.minHeight,
@@ -58,13 +59,13 @@ const Form = () => {
         max: form.maxWeight,
       },
       life_span: form.lifeSpan,
-      temperament: form.selectedTemperaments, 
+      temperament: form.selectedTemperaments, // Incluye los temperamentos seleccionados
       image: form.image,
     };
   
-    dispatch(addDog(newDog));// // Envía la acción 'addDog' al store para agregar el nuevo perro
+    dispatch(addDog(newDog));
   
-    setForm({//Resetea los campos del formulario
+    setForm({
       name: '',
       minHeight: '',
       maxHeight: '',
@@ -74,6 +75,14 @@ const Form = () => {
       selectedTemperaments: [],
       image: '',
     });
+  };
+  const areAllFieldsFilled = () => {
+    for (const field in form) {
+      if (form[field] === '') {
+        return false;
+      }
+    }
+    return true;
   };
   
   return (
@@ -87,7 +96,7 @@ const Form = () => {
           value={form.name}
           onChange={handleChange}
           name="name"
-          required
+         
         />
         <label htmlFor="minHeight">Altura mínima:</label>
         <input
@@ -96,7 +105,7 @@ const Form = () => {
           value={form.minHeight}
           onChange={handleChange}
           name="minHeight"
-          required
+          
         />
 
         <label htmlFor="maxHeight">Altura máxima:</label>
@@ -106,7 +115,7 @@ const Form = () => {
           value={form.maxHeight}
           onChange={handleChange}
           name="maxHeight"
-          required
+         
         />
 
         <label htmlFor="minWeight">Peso mínimo:</label>
@@ -116,7 +125,7 @@ const Form = () => {
           value={form.minWeight}
           onChange={handleChange}
           name="minWeight"
-          required
+          
         />
 
         <label htmlFor="maxWeight">Peso máximo:</label>
@@ -126,7 +135,7 @@ const Form = () => {
           value={form.maxWeight}
           onChange={handleChange}
           name="maxWeight"
-          required
+          
         />
 
         <label htmlFor="lifeSpan">Años de vida:</label>
@@ -136,7 +145,7 @@ const Form = () => {
           value={form.lifeSpan}
           onChange={handleChange}
           name="lifeSpan"
-          required
+         
         />
 
         <label htmlFor="image">Imagen (URL):</label>
@@ -146,7 +155,7 @@ const Form = () => {
           value={form.image}
           onChange={handleImageChange}
           name="image"
-          required
+          
         />
 
         <label htmlFor="temperaments">Temperamentos:</label>
@@ -164,7 +173,12 @@ const Form = () => {
           onChange={handleSelectChange}
         />
 
-        <button type="submit">Crear nueva raza</button>
+      <input
+      className={styles.button}
+      type="submit"
+      value="Crear nueva raza"
+      disabled={!areAllFieldsFilled()} // Deshabilita el botón si no todos los campos están llenos
+    />
       </form>
     </div>
   );
