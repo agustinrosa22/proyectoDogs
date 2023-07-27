@@ -18,7 +18,7 @@ import {
 export const getDogs = () => {//funcion para obtener la lista de los perros
   return async function (dispatch) {
     try {
-      const apiData = await axios.get('http://localhost:3001/dogs');
+      const apiData = await axios.get('/dogs');
       const dogs = apiData.data;
       
       dispatch({ type: GET_DOGS, payload: dogs });//se despacha a la store con el payload que contiene los datos de los perros.
@@ -31,7 +31,7 @@ export const getDogs = () => {//funcion para obtener la lista de los perros
 export const addDog = (dog) => { //funcion que realiza una solicitud POST para agregar un nuevo perro a la base de datos
   return async function (dispatch) {
     try {
-      const response = await axios.post('http://localhost:3001/dogs', dog);
+      const response = await axios.post('/dogs', dog);
       dispatch({ type: ADD_DOG, payload: response.data });
     } catch (error) {
       console.error(error);
@@ -42,7 +42,7 @@ export const addDog = (dog) => { //funcion que realiza una solicitud POST para a
 export const getTemperaments = () => { // funcion para obtener la lista de temperamentos de los perros.
   return async function (dispatch) {
     try {
-      const response = await axios.get('http://localhost:3001/temperaments');
+      const response = await axios.get('/temperaments');
       const temperaments = response.data;
 
       // Convertir el objeto de temperamentos en un arreglo
@@ -58,7 +58,7 @@ export const getTemperaments = () => { // funcion para obtener la lista de tempe
 export const searchDogs = (name) => {//función que toma el parámetro name y realiza una solicitud GET para buscar perros que coincidan con el nombre proporcionado.
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+      const { data } = await axios.get(`/dogs?name=${name}`);
 
       if (data.length > 0) {
         dispatch({
