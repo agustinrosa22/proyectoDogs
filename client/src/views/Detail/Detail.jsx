@@ -10,9 +10,10 @@ const Detail = () => {
   useEffect(() => { //realiza una solicitud a la API una vez que el componente se monta
     const fetchDog = async () => {
       try {
-        const response = await axios.get(`/${id}`);//solicitud GET a la API o DB utilizando el id obtenido de useParams
+        const response = await axios.get(`https://server-dogs-p9lh.onrender.com/dogs/${id}`);//solicitud GET a la API o DB utilizando el id obtenido de useParams
         setDog(response.data);// Se actualiza el estado 'dog' con los datos obtenidos de la API o DB
       } catch (error) {
+        console.log(error);
         console.error('Error fetching dog:', error);
       }
     };
